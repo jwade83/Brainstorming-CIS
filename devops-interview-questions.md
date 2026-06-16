@@ -51,6 +51,19 @@ Key Kubernetes building blocks:
 
 **How to frame the relationship.** They aren't competitors — they operate at different layers. Docker (or any OCI builder/runtime) produces and runs individual containers; Kubernetes orchestrates many containers across a cluster. A typical pipeline builds a Docker image, pushes it to a registry, and Kubernetes pulls and schedules it. For local single-host workloads, **Docker Compose** is the lightweight orchestration alternative.
 
+### Likely follow-up questions
+- What's the difference between a container and a virtual machine?
+- How do you reduce a Docker image's size? (multi-stage builds, slim/distroless base images, fewer layers, `.dockerignore`)
+- What's the difference between `CMD` and `ENTRYPOINT` in a Dockerfile? Between `COPY` and `ADD`?
+- How does Docker layer caching work, and how do you order a Dockerfile to maximise cache hits?
+- What is a Pod, and why might it contain more than one container? (sidecars)
+- How does a Service find its Pods? Explain labels, selectors, and `kube-proxy`.
+- How do liveness, readiness, and startup probes differ?
+- How does a rolling update work, and how would you roll one back?
+- How do you persist data in Kubernetes? (PV, PVC, StorageClass, StatefulSets)
+- How do requests and limits affect scheduling and OOM behaviour?
+- Why was Dockershim removed, and what replaced it?
+
 ---
 
 ## 2. What Happens When You Type a Website URL Into Your Browser?
@@ -93,6 +106,19 @@ This is the classic "explain the whole stack" question. A strong answer walks th
 
 **Cross-cutting concerns worth mentioning:** caching at every level (browser, CDN, server), connection reuse/keep-alive, redirects, and the role of the **OSI/TCP-IP model** layers (link → IP → TCP → TLS → HTTP) — naming these signals depth.
 
+### Likely follow-up questions
+- What's the difference between TCP and UDP, and when would you choose each?
+- Walk me through the TCP three-way handshake. What is TCP slow start?
+- What's the difference between an A, AAAA, CNAME, MX, and TXT record?
+- What does DNS TTL control, and how does it affect failover?
+- What does a TLS handshake actually negotiate, and what changed in TLS 1.3?
+- How does HTTPS give you confidentiality, integrity, *and* authentication?
+- What problems do HTTP/2 and HTTP/3 (QUIC) solve over HTTP/1.1? (multiplexing, head-of-line blocking)
+- What's the difference between status codes 301/302, 401/403, and 502/504?
+- What are CORS and the same-origin policy, and why do they exist?
+- How does browser/CDN caching work? (`Cache-Control`, `ETag`, CDN edge caching)
+- What's the difference between `async` and `defer` on a script tag, and how do they affect rendering?
+
 ---
 
 ## 3. What Is Infrastructure as Code (IaC)?
@@ -133,6 +159,18 @@ This is the classic "explain the whole stack" question. A strong answer walks th
 **GitOps** extends IaC: git is the single source of truth, and an automated agent (Argo CD, Flux) continuously reconciles the live environment to match the repository.
 
 **Trade-offs to acknowledge** (shows maturity): state files can contain secrets and must be secured/locked; large blast radius if a bad change is applied; a learning curve; and the need for testing (`terraform plan`, `terratest`, dry runs) to avoid destructive surprises.
+
+### Likely follow-up questions
+- What's the difference between declarative and imperative IaC? Where does Ansible sit?
+- What is Terraform state, why is it needed, and how do you manage it for a team? (remote backend, state locking)
+- How do you keep secrets out of state files and out of version control?
+- What's the difference between provisioning and configuration management?
+- What is configuration drift, and how does immutable infrastructure prevent it?
+- What's the difference between `terraform plan` and `terraform apply`? What does `terraform import` do?
+- How do you structure reusable IaC? (modules, variables, workspaces/environments)
+- How is IaC different from GitOps? How do Argo CD / Flux fit in?
+- How would you test infrastructure code or enforce policy before apply? (checkov, tfsec, OPA/Sentinel, terratest)
+- How do you handle a change with a large blast radius safely? (targeted plans, staged rollout, review gates)
 
 ---
 
@@ -175,6 +213,18 @@ These overlap heavily, which is exactly why interviewers ask. The honest framing
 - Use **load balancer** language when the goal is *spreading traffic across many identical backends for scale and resilience*.
 - Use **reverse proxy** language when the goal is *an intelligent front door doing TLS, caching, routing, and security* — even with a single backend.
 - Tools like **NGINX, HAProxy, Envoy, and Traefik** do both, which is why in practice the same component often plays both roles. Cloud providers split them into dedicated services (ALB/NLB, Cloud Load Balancing, Azure Front Door / Application Gateway).
+
+### Likely follow-up questions
+- What's the difference between a forward proxy and a reverse proxy?
+- What's the difference between Layer 4 and Layer 7 load balancing? When would you pick each?
+- Name some load-balancing algorithms and when each is appropriate. (round-robin, least-connections, weighted, IP-hash)
+- What are sticky sessions, and what problem do they create for scaling?
+- What is SSL/TLS termination, and why do it at the load balancer/proxy?
+- How do health checks work, and what happens when a backend fails one?
+- How would a reverse proxy help mitigate a DDoS attack or add a WAF?
+- What does a Kubernetes Ingress controller have in common with a reverse proxy?
+- What's the difference between AWS ALB and NLB?
+- How does an API gateway differ from a plain reverse proxy?
 
 ---
 
@@ -220,3 +270,16 @@ The goal is to **catch integration problems within minutes of writing the code**
 - **Auditability** — every change is traceable through the pipeline.
 
 **Supporting practices & tooling.** CI/CD relies on solid version control and branching strategy (trunk-based development, short-lived branches), automated testing at multiple levels (the test pyramid), and IaC for consistent environments. Common tools: **GitHub Actions, GitLab CI, Jenkins, CircleCI, Argo CD, Azure DevOps, Spinnaker.** Maturity is often measured with the **DORA metrics**: deployment frequency, lead time for changes, change failure rate, and mean time to recovery (MTTR).
+
+### Likely follow-up questions
+- What's the difference between Continuous Delivery and Continuous Deployment?
+- Walk me through the stages of a CI/CD pipeline you've built.
+- What's the difference between blue/green, canary, and rolling deployments?
+- How do feature flags let you decouple *deploy* from *release*?
+- How do you roll back a bad deployment quickly and safely?
+- What belongs in CI vs CD? Where do security scans (SAST/DAST/SCA) fit?
+- How do you keep pipelines fast as the test suite grows? (parallelism, caching, test pyramid, selective runs)
+- How do you manage secrets and environment-specific config in a pipeline?
+- What is "integration hell" and how does CI prevent it?
+- What are the four DORA metrics, and what do they tell you about delivery health?
+- How would you gate a production deploy on quality/health signals?
