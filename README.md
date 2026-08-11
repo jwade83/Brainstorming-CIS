@@ -24,6 +24,7 @@ The repo is intentionally lightweight and will grow as needed. Current contents:
 |------|-------------|
 | `README.md` | This file. |
 | `devops-interview-questions.md` | Study notes: 5 foundational DevOps interview questions with deep-dive answers. |
+| `hauntology-liminal-horror.md` | Study notes: hauntology (Derrida → Fisher) and liminal horror — the Backrooms & the Farlands as expressions of our "cancelled future." |
 
 A test stack (language, test runner, linting) hasn't been chosen yet — it'll be added once the direction of the experiments is clearer.
 
