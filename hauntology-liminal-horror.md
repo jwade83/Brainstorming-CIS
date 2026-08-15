@@ -184,6 +184,66 @@ Both are **liminal**: thresholds, in-between zones, edges. And that's the point 
 
 ---
 
+## 8. How the Domain Has Progressed: A Media Lineage
+
+**What this is testing:** Hauntology and liminal horror aren't just a theory — they're a living aesthetic that has *moved through media* over ~25 years, mutating each time it changed platforms. Tracing that progression shows how a piece of academic philosophy became a folk-internet genre and, finally, its own self-aware discourse (the explainer video that started these notes).
+
+### Quick answer
+- **2000s — Music.** Hauntology is *first* an art movement, mostly in electronic music. This is the material Fisher actually wrote about.
+- **~2010 — Internet aesthetics.** Vaporwave translates the mood into a native-online, image-and-sound meme about dead consumer futures.
+- **Mid–late 2010s — Analog horror (YouTube).** Degraded-broadcast storytelling turns the *aesthetic of decayed media* into a horror grammar.
+- **2020s — Liminal-space myths & games.** The Backrooms, the Farlands, and a wave of walking-sim games make the *space itself* the subject.
+- **2020s–now — Short-form video essays.** Creators like @Eterna metabolise the whole lineage back into theory for a TikTok audience — the domain becomes self-aware.
+
+Each stage doesn't replace the last; it *layers* on top, and the tools get more accessible each time (studio → bedroom producer → YouTube channel → game engine → phone).
+
+### The lineage in detail
+
+**Stage 1 — Music: the original hauntological canon (roughly 1998–2011).**
+This is the ground truth, because it's the media Fisher himself analysed.
+- **Burial** — *Untrue* (2007, Hyperdub). Fisher's central exhibit: crackle, vinyl surface noise, and pitched, ghostly vocals that sound like a rave remembered rather than attended — the lost collective euphoria of '90s UK dance music.
+- **Ghost Box** (label, founded 2004) — **Belbury Poly**, **The Focus Group**, **Pye Corner Audio**. They fabricate a "parallel England" out of library music, public-information films, and mid-century BBC textures — mourning the *postwar social-democratic future* that Britain abandoned.
+- **The Caretaker** (Leyland Kirby) — *An Empty Bliss Beyond This World* (2011) and the six-stage *Everywhere at the End of Time* (2016–2019), which musically enacts the progression of dementia through decaying ballroom loops. Notably, this *pre-internet-native* work went massively viral on **TikTok/YouTube around 2020** as a memory challenge — an early sign of the lineage folding back on itself.
+- **William Basinski** — *The Disintegration Loops* (2002): tape literally crumbling as it plays, recorded against the backdrop of 9/11. Decay as content.
+- **Boards of Canada** — *Music Has the Right to Children* (1998): warped, sun-faded analog nostalgia that predates and prefigures the whole mood.
+
+**Stage 2 — Vaporwave and the internet-native turn (~2010–2015).**
+Hauntology leaves the record label and becomes a *meme* anyone with a laptop can make.
+- **Chuck Person's *Eccojams Vol. 1*** (Daniel Lopatin / Oneohtrix Point Never, 2010) and **Macintosh Plus — *Floral Shoppe*** (Vektroid, 2011) are the touchstones: slowed, chopped '80s–'90s corporate pop, muzak, and smooth jazz, wrapped in Greco-Roman busts and dead-mall imagery.
+- The point is explicitly hauntological: vaporwave mourns the *utopia that consumer capitalism promised* — the gleaming, frictionless techno-future of shopping malls, Windows 95, and corporate optimism — by exhuming its muzak and letting it rot. Subgenres like **mallsoft** and **signalwave** make the "devastatingly empty commercial interior" (see the Backrooms, Section 5) into a *sound* years before it was a horror image.
+
+**Stage 3 — Analog horror on YouTube (~2015–present).**
+The decayed-media *aesthetic* from Stages 1–2 becomes a full horror storytelling grammar.
+- **Local58** (Kris Straub, 2015), **Gemini Home Entertainment** (2019), **The Mandela Catalogue** (Alex Kister, 2021), **The Walten Files** (2020). Also the ARG **Petscop** (2017).
+- The shared move: tell horror through the *format of obsolete media* — VHS tracking errors, emergency-broadcast interruptions, corrupted PSA reels, glitched PS1 games. The **medium is the haunting**: a signal from a past that imagined a safe, ordered future (public broadcasting, children's edutainment) now returning *corrupted*. This is hauntology as genre convention, not just mood.
+
+**Stage 4 — Liminal-space myths and games (2019–present).**
+Now the *space itself* is the subject — the stage these notes' two case studies belong to.
+- Folklore: **The Backrooms** (2019 →), supercharged by **Kane Pixels'** cinematic found-footage series (2022, an A24 film in development); the **Farlands** (Minecraft's floating-point edge, then a TikTok metaphor).
+- Games make it interactive: **The Exit 8** (Kotake Create, 2023 — an endless, looping subway passage you escape only by noticing anomalies), **Pools** (2024), **Anemoiapolis**, **The Complex: Found Footage** (2022). Adjacent AAA: **Control** (Remedy, 2019) and its brutalist "Oldest House" as a study in the Fisherian *eerie*.
+- Prestige screen work runs in parallel: **Skinamarink** (2022) for domestic analog dread; **Twin Peaks: The Return** (2017) and **Adam Curtis's *HyperNormalisation*** (2016) as feature-length arguments about cultural stasis.
+
+**Stage 5 — The video-essay meta-turn (2020s–now).**
+The final progression is *reflexive*. Creators on TikTok and YouTube — the @Eterna clip these notes come from is a textbook example — take the whole 25-year lineage and hand it *back to the audience as theory*, in 60–180 seconds, on the very platforms (TikTok, algorithmic feeds) that the theory is now about. The domain has become self-aware: the medium diagnosing the condition is *itself* one of the "algorithmic worlds with terrifying finite edges" it describes.
+
+### Media map
+
+| Stage | Era | Medium | Exemplars | What it haunts |
+|---|---|---|---|---|
+| 1 | 1998–2011 | Electronic music | Burial, Ghost Box, The Caretaker, Basinski, Boards of Canada | Lost postwar/rave futures; decay of memory |
+| 2 | 2010–2015 | Internet music + image | Macintosh Plus, Oneohtrix Point Never, mallsoft | The dead utopia of consumer capitalism |
+| 3 | 2015–now | YouTube analog horror | Local58, Mandela Catalogue, Gemini Home Ent., Petscop | Corrupted broadcast/edutainment futures |
+| 4 | 2019–now | Folklore + games + film | Backrooms, Farlands, The Exit 8, Control, Skinamarink | Empty/broken infrastructures and worlds |
+| 5 | 2020s–now | Short-form video essay | @Eterna and peers | The feed diagnosing itself |
+
+### Threads worth following
+- **Accessibility as the driver.** Each stage lowers the barrier to production (label → DAW → screen-capture → game engine → phone). Does democratised tooling *spread* hauntology, or dilute it into content?
+- **The recursion problem.** When the critique of "recycled culture" itself becomes a recognisable, algorithmically-rewarded content genre, has it escaped the slow cancellation or become another instance of it?
+- **The Caretaker on TikTok** is the sharpest case: a 2010s art project about memory-loss going viral as a 2020s challenge. Is that the lineage healing, or eating itself?
+- Where does **AI-generated media** — infinite, uncanny, edge-less until it suddenly glitches — fit as a possible Stage 6?
+
+---
+
 ## Glossary
 
 - **Hauntology** — Derrida's pun on *ontology*; the study of how the not-quite-present (spectres, lost futures, cancelled alternatives) acts on the present.
@@ -205,6 +265,13 @@ Both are **liminal**: thresholds, in-between zones, edges. And that's the point 
 - Franco "Bifo" Berardi, *After the Future* (2011) — source of "slow cancellation of the future."
 - Francis Fukuyama, *The End of History and the Last Man* (1992) — the thesis Derrida was writing against.
 - Victor Turner on **liminality** — anthropological background for "liminal" space.
+
+**Media referenced in Section 8**
+
+- Burial, *Untrue* (2007); the Ghost Box label roster; The Caretaker, *Everywhere at the End of Time* (2016–2019); William Basinski, *The Disintegration Loops* (2002); Boards of Canada, *Music Has the Right to Children* (1998).
+- Macintosh Plus, *Floral Shoppe* (2011); Chuck Person / Oneohtrix Point Never, *Eccojams Vol. 1* (2010) — vaporwave touchstones.
+- *Local58*, *Gemini Home Entertainment*, *The Mandela Catalogue*, *The Walten Files*, *Petscop* — YouTube analog horror / ARGs.
+- *The Backrooms (Found Footage)* by Kane Pixels (2022); games *The Exit 8* (2023), *Pools* (2024), *Control* (2019); films *Skinamarink* (2022), *Twin Peaks: The Return* (2017); Adam Curtis, *HyperNormalisation* (2016).
 
 ---
 
