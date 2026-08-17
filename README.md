@@ -26,6 +26,8 @@ The repo is intentionally lightweight and will grow as needed. Current contents:
 | `devops-interview-questions.md` | Study notes: 5 foundational DevOps interview questions with deep-dive answers. |
 | `hauntology-liminal-horror.md` | Study notes: hauntology (Derrida → Fisher) and liminal horror — the Backrooms & the Farlands as expressions of our "cancelled future." |
 | `hauntology-liminal-horror.html` | Self-contained, styled web version of the hauntology notes (readable in any browser; light/dark aware). |
+| `hauntology-essay.md` | Companion essay: hauntology as one continuous argument (Derrida → Fisher → internet myths → media lineage), with an exhaustive cited bibliography. |
+| `hauntology-essay.html` | Self-contained, styled web version of the essay, with clickable citation references. |
 
 A test stack (language, test runner, linting) hasn't been chosen yet — it'll be added once the direction of the experiments is clearer.
 
