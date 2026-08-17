@@ -1,0 +1,252 @@
+<title>Who Cancels the Future?</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{
+    --bg:#e7e7e9; --surface:#f1f1f2; --sunk:#dcdce0;
+    --ink:#191b1f; --ink-soft:#4b4f57; --ink-faint:#787d87;
+    --line:#c8c9ce; --line-soft:#d6d7db;
+    --accent:#256f68; --accent-soft:#4f948c; --accent-wash:#dfeae8;
+    --ghost:#9c4a76;
+    --scan:rgba(20,24,30,.025);
+    --shadow:0 1px 2px rgba(20,24,30,.06),0 8px 30px rgba(20,24,30,.06);
+    --split-a:rgba(0,150,160,.55); --split-b:rgba(180,50,110,.5);
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d0f12; --surface:#15181d; --sunk:#0a0b0e;
+      --ink:#dee1e6; --ink-soft:#9aa0aa; --ink-faint:#6a707a;
+      --line:#262a31; --line-soft:#1d2026;
+      --accent:#6fd6c4; --accent-soft:#4d9a8e; --accent-wash:#12211f;
+      --ghost:#d982b2;
+      --scan:rgba(255,255,255,.02);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 40px rgba(0,0,0,.5);
+      --split-a:rgba(90,220,210,.5); --split-b:rgba(230,110,175,.45);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d0f12; --surface:#15181d; --sunk:#0a0b0e;
+    --ink:#dee1e6; --ink-soft:#9aa0aa; --ink-faint:#6a707a;
+    --line:#262a31; --line-soft:#1d2026;
+    --accent:#6fd6c4; --accent-soft:#4d9a8e; --accent-wash:#12211f;
+    --ghost:#d982b2;
+    --scan:rgba(255,255,255,.02);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 40px rgba(0,0,0,.5);
+    --split-a:rgba(90,220,210,.5); --split-b:rgba(230,110,175,.45);
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    font-size:18px; line-height:1.64; letter-spacing:.005em;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+    background:repeating-linear-gradient(0deg,var(--scan) 0 1px,transparent 1px 3px)}
+  .wrap{position:relative; z-index:2; max-width:700px; margin:0 auto; padding:0 24px 96px}
+
+  header.hero{padding:72px 0 40px; border-bottom:1px solid var(--line)}
+  .eyebrow{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--accent); margin:0 0 22px}
+  h1.title{font-size:clamp(2.4rem,7.5vw,3.7rem); line-height:1.04; margin:0; font-weight:600;
+    letter-spacing:-.015em; text-wrap:balance; color:var(--ink);
+    text-shadow:.02em 0 var(--split-a),-.02em 0 var(--split-b)}
+  .subhead{font-family:ui-monospace,Menlo,monospace; font-size:.8rem; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ghost); margin:18px 0 0}
+  .dek{font-size:1.14rem; color:var(--ink-soft); margin:22px 0 0; max-width:60ch; text-wrap:pretty; font-style:italic}
+  .dek a{color:var(--accent)}
+
+  section.sec{padding:52px 0 8px; border-top:1px solid var(--line-soft)}
+  section.sec:first-of-type{border-top:none}
+  .sec-num{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:12px; letter-spacing:.2em;
+    color:var(--accent); text-transform:uppercase}
+  h2.sec-h{font-size:clamp(1.55rem,4.3vw,2rem); line-height:1.15; margin:12px 0 18px;
+    font-weight:600; letter-spacing:-.01em; text-wrap:balance}
+  p{margin:16px 0} p:first-of-type{margin-top:0}
+  strong{font-weight:700; color:var(--ink)}
+  .lead-term{color:var(--accent)}
+  .pull{margin:28px 0; padding:2px 0 2px 22px; border-left:2px solid var(--accent-soft);
+    font-size:1.2rem; line-height:1.42; font-style:italic; color:var(--ink); text-wrap:balance}
+
+  a.cite{font-family:ui-monospace,Menlo,monospace; font-size:.62em; font-weight:600;
+    color:var(--accent); text-decoration:none; vertical-align:super; line-height:0; padding:0 .5px}
+  a.cite:hover{text-decoration:underline}
+  a.cite::before{content:"["} a.cite::after{content:"]"}
+
+  /* named-layer list for the genealogy */
+  .layers{margin:20px 0; display:grid; gap:0}
+  .layer{padding:18px 0; border-top:1px solid var(--line-soft)}
+  .layer:first-child{border-top:none}
+  .layer .who{font-weight:700; color:var(--ink)}
+  .layer .yr{font-family:ui-monospace,Menlo,monospace; font-size:.72rem; color:var(--ink-faint); letter-spacing:.04em}
+  .layer p{margin:8px 0 0; font-size:.98rem; color:var(--ink-soft)}
+
+  ul.felt{padding-left:1.1em} ul.felt li{margin:12px 0; color:var(--ink-soft)}
+  ul.felt li::marker{color:var(--accent-soft)} ul.felt strong{color:var(--ink)}
+
+  .exit{background:var(--accent-wash); border-radius:12px; padding:22px 24px; margin:22px 0 4px}
+  .exit ul{margin:0; padding-left:1.1em} .exit li{margin:12px 0; color:var(--ink-soft)}
+  .exit li::marker{color:var(--accent)} .exit strong{color:var(--ink)}
+
+  /* references */
+  section.refs{padding:52px 0 8px; border-top:2px solid var(--line)}
+  .refs .grp{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--ghost); margin:32px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--line-soft)}
+  .note{font-size:.92rem; color:var(--ink-soft); font-style:italic; background:var(--accent-wash);
+    padding:16px 20px; border-radius:10px; margin:18px 0 6px}
+  ol.reflist{margin:0; padding:0; list-style:none}
+  ol.reflist li{display:flex; gap:12px; padding:11px 0; border-bottom:1px solid var(--line-soft);
+    font-size:.94rem; color:var(--ink-soft); line-height:1.5; scroll-margin-top:16px}
+  ol.reflist li:target{background:var(--accent-wash); border-radius:8px; padding-left:10px; padding-right:10px}
+  ol.reflist .n{font-family:ui-monospace,Menlo,monospace; font-size:.82rem; color:var(--accent);
+    font-weight:600; min-width:2.4ch; text-align:right; padding-top:1px}
+  ol.reflist cite{font-style:normal} ol.reflist em{color:var(--ink)}
+
+  footer{margin-top:56px; padding-top:26px; border-top:1px solid var(--line);
+    font-size:.86rem; color:var(--ink-faint); font-style:italic}
+  a:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:3px}
+  @media (max-width:560px){body{font-size:17px} header.hero{padding:52px 0 32px} .wrap{padding:0 18px 72px}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <p class="eyebrow">Deep Dive · Cultural Theory</p>
+    <h1 class="title">Who Cancels the Future?</h1>
+    <p class="subhead">The self-policing of the imagination</p>
+    <p class="dek">The companion essay describes the &ldquo;slow cancellation of the future&rdquo; as a mood. This asks the harder question the phrase hides — <em>cancellation implies a canceller</em> — and traces the machinery that forecloses the imagination by running through the people it constrains. Cited to the numbered <a href="#sources">Sources</a>.</p>
+  </header>
+
+  <section class="sec">
+    <span class="sec-num">§ 01</span>
+    <h2 class="sec-h">The Suppressed Subject</h2>
+    <p>Mark Fisher&rsquo;s &ldquo;slow cancellation of the future&rdquo;<a class="cite" href="#ref-1">1</a> is a description with a missing agent. Something is cancelling; the grammar hides who. Go looking for the canceller and you find there is no single one — and that absence is the entire mechanism. Late-capitalist power has solved a problem earlier forms could not: <strong>how to make constraint feel like freedom, so that no enforcer is needed because every subject enforces it on themselves.</strong></p>
+    <p>An ideology that must be <em>argued for</em> is weak. One that has become the invisible background — the water — needs neither argument nor police.</p>
+    <p class="pull">The impoverished imagination is not a deprivation but a security mechanism: an assault on the capacity to imagine alternatives that succeeds precisely by getting the imagination to police itself.</p>
+    <p>Foreclosure comes to feel like maturity, and the order needs no enforcer because every subject has become one. What follows excavates how that self-policing was built — and how it covers its own tracks.</p>
+  </section>
+
+  <section class="sec">
+    <span class="sec-num">§ 02</span>
+    <h2 class="sec-h">A Genealogy of Self-Policing Power</h2>
+    <p>Fisher is the late synthesizer of roughly a century of thought. Each layer adds a distinct mechanism by which power migrates from the outside of the subject to the inside.</p>
+    <div class="layers">
+      <div class="layer"><span class="who">Gramsci — hegemony</span> <span class="yr">1930s</span>
+        <p>Power rules less by force than by <em>consent</em>, manufactured through &ldquo;common sense.&rdquo;<a class="cite" href="#ref-2">2</a> The dominant order becomes the horizon of the thinkable; domination arrives disguised as agreement.</p></div>
+      <div class="layer"><span class="who">Althusser — interpellation</span> <span class="yr">1970</span>
+        <p>Ideology &ldquo;hails&rdquo; the individual, who turns and recognizes himself in the call.<a class="cite" href="#ref-3">3</a> The subject is <em>constituted by</em> the ideology it inhabits — which is why critique-from-outside is so hard: the self that would critique was assembled by the thing to be critiqued.</p></div>
+      <div class="layer"><span class="who">Adorno &amp; Horkheimer / Marcuse — the administered imagination</span> <span class="yr">1944–1964</span>
+        <p>The <strong>culture industry</strong> standardizes leisure so even fantasy arrives ready-made.<a class="cite" href="#ref-4">4</a> Marcuse&rsquo;s <em>One-Dimensional Man</em> is the deepest root of the &ldquo;impoverished imagination&rdquo; thesis: the loss of the <strong>&ldquo;second dimension&rdquo;</strong> (the capacity to conceive things otherwise) and <strong>&ldquo;repressive desublimation&rdquo;</strong> — a managed, commodified freedom granted <em>in exchange for</em> the deeper freedom to imagine another order.<a class="cite" href="#ref-5">5</a> One may want anything except another world.</p></div>
+      <div class="layer"><span class="who">Debord — the spectacle</span> <span class="yr">1967</span>
+        <p>Where lived experience is replaced by its representation, the imagination is <em>saturated</em> rather than starved.<a class="cite" href="#ref-6">6</a> No empty space remains in which an alternative might be pictured.</p></div>
+      <div class="layer"><span class="who">Foucault — the entrepreneur of the self</span> <span class="yr">1975–1979</span>
+        <p>The panopticon&rsquo;s innovation is the internalized guard.<a class="cite" href="#ref-7">7</a> Then, decisively: <strong>neoliberalism does not merely regulate the subject but manufactures a new one</strong> — <em>homo economicus</em> as the <strong>&ldquo;entrepreneur of himself,&rdquo;</strong> applying market rationality to his own education, relationships, body, time.<a class="cite" href="#ref-8">8</a> Self-policing is not a malfunction; it is the product.</p></div>
+      <div class="layer"><span class="who">Deleuze &amp; Han — control and psychopolitics</span> <span class="yr">1990–2014</span>
+        <p>Deleuze&rsquo;s <strong>&ldquo;societies of control&rdquo;</strong> replace walled enclosures with <em>continuous modulation</em> — perpetual assessment, debt, the never-finished — so there are no walls to escape.<a class="cite" href="#ref-9">9</a> <strong>Byung-Chul Han</strong> completes the arc: the <strong>&ldquo;achievement-subject&rdquo;</strong> who <strong>exploits and surveils himself in the name of freedom</strong>, and burns out doing so.<a class="cite" href="#ref-10">10</a><a class="cite" href="#ref-11">11</a> Freedom and coercion collapse into each other; power exercised through one&rsquo;s own initiative is nearly unbreakable, because there is nothing external to push against.</p></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <span class="sec-num">§ 03</span>
+    <h2 class="sec-h">The Self-Covering Mechanism</h2>
+    <p>The system&rsquo;s genius is not merely that it forecloses, but that it <strong>pre-loads the response to its own critique.</strong> This is why lucidity is not liberation. Three mechanisms:</p>
+    <p><strong class="lead-term">Cynical reason</strong> (Sloterdijk 1983; Žižek 1989). The classical formula was <em>&ldquo;they do not know it, but they are doing it.&rdquo;</em> Žižek inverts it: <strong>&ldquo;they know very well what they are doing, but they are doing it anyway.&rdquo;</strong><a class="cite" href="#ref-12">12</a><a class="cite" href="#ref-13">13</a> Awareness is not exit. One can perceive capitalist realism clearly, name it, critique it — and reproduce it faithfully. Cynical distance is the <em>operative mode of compliance</em>.</p>
+    <p><strong class="lead-term">Recuperation</strong> (Situationist International, 1967). Every revolt is metabolized back into commodity: the protest becomes a T-shirt, the transgression an aesthetic, the counterculture a demographic.<a class="cite" href="#ref-6">6</a><a class="cite" href="#ref-14">14</a> The order does not suppress its opposition so much as <em>digest</em> it.</p>
+    <p><strong class="lead-term">Interpassivity and gestural anti-capitalism</strong> (Fisher). Mass culture stages lavish anti-capitalist spectacle — the evil corporation, the polished dystopia — <em>precisely so discontent can be discharged by watching it.</em><a class="cite" href="#ref-1">1</a> The film performs our protest for us, leaving us more reconciled to compliance. Anti-capitalism becomes a <em>genre within</em> capitalist realism, a pressure-release valve. This is the essay&rsquo;s <strong>recursion problem</strong> seen from the side of power: critique does not puncture the system, it <em>feeds</em> it — which implicates hauntology-as-content, these documents included.</p>
+  </section>
+
+  <section class="sec">
+    <span class="sec-num">§ 04</span>
+    <h2 class="sec-h">How the Foreclosure Is Felt</h2>
+    <p>Where the above is structural, Fisher named how it lands in a single nervous system<a class="cite" href="#ref-1">1</a>:</p>
+    <ul class="felt">
+      <li><strong>Reflexive impotence</strong> — &ldquo;I know it is bad, but I can do nothing about it,&rdquo; where the <em>knowing itself</em> is the seal on the exit.</li>
+      <li><strong>Depressive hedonia</strong> — not the inability to feel pleasure but the inability to do anything <em>except</em> pursue it; a horizon narrowed to the next stimulus.</li>
+      <li><strong>The privatization of stress</strong> — the political masterstroke. Depression and anxiety are reframed as private, chemical faults to be medicated individually, never as <em>symptoms of a social order</em>. One polices oneself by blaming oneself.</li>
+      <li><strong>Business ontology</strong> — the unspoken assumption that everything, a school or hospital included, ought to be run like a firm; where capitalist realism stops being a belief and becomes the grammar of the real.</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <span class="sec-num">§ 05</span>
+    <h2 class="sec-h">The American Specificity</h2>
+    <p>The critique is often sharpest from outside the United States, for two distinct reasons.</p>
+    <p><strong class="lead-term">Structural.</strong> America has perhaps the thinnest native tradition of imagining an alternative — the question <strong>Werner Sombart</strong> posed in 1906, <em>Why Is There No Socialism in the United States?</em><a class="cite" href="#ref-15">15</a> The frontier myth and the self-made man <em>are</em> the entrepreneur-of-the-self ideology in folk form, so the foreclosure feels native — weather rather than politics. <strong>Wendy Brown</strong> gives the contemporary account: neoliberalism&rsquo;s <strong>economization of everything</strong> hollows out <em>homo politicus</em>, the citizen capable of imagining collective self-rule, replacing him with human capital.<a class="cite" href="#ref-16">16</a> <strong>Lauren Berlant&rsquo;s &ldquo;cruel optimism&rdquo;</strong> names the affective glue: attachment to the very good-life fantasies that obstruct flourishing.<a class="cite" href="#ref-17">17</a></p>
+    <p><strong class="lead-term">Intentional and historical.</strong> The narrowing was not only drift. There is a documented history of the American political imagination being <em>actively</em> cleared: the Red Scares, McCarthyism, and <strong>COINTELPRO</strong>, the FBI program to surveil, disrupt, and destroy left and liberation movements, exposed by the Church Committee in 1976.<a class="cite" href="#ref-18">18</a> The space of the thinkable was, in part, cleared by design — so the intuition that the assault was &ldquo;instilled&rdquo; rather than merely emergent has a concrete referent, not only a theoretical one.</p>
+    <p><strong class="lead-term">And then exported.</strong> The American culture industry — Hollywood, and now the platform companies of Silicon Valley — is the world&rsquo;s dream-factory, so <em>other nations&rsquo; futures are increasingly dreamed in American media.</em> The foreclosed imagination becomes the default global horizon. This is why outside observers can diagnose it so clearly: they are watching their own imaginative space colonized by it.</p>
+  </section>
+
+  <section class="sec">
+    <span class="sec-num">§ 06 · Coda</span>
+    <h2 class="sec-h">Keeping the Door Ajar</h2>
+    <p>The tradition does not only map the cell; it keeps working at the door — which matters, because an analysis that stopped at diagnosis would itself become a counsel of reflexive impotence, one more interpassive discharge.</p>
+    <div class="exit">
+      <ul>
+        <li><strong>Fisher&rsquo;s &ldquo;Acid Communism&rdquo;</strong> — his unfinished final project — proposes the deliberate <em>recovery of suppressed futures</em>, especially the 1960s–70s fusion of psychedelic consciousness and collective liberation, as evidence that the horizon was once wider and could be again.<a class="cite" href="#ref-19">19</a><a class="cite" href="#ref-20">20</a></li>
+        <li><strong>Ernst Bloch&rsquo;s &ldquo;principle of hope&rdquo;</strong><a class="cite" href="#ref-21">21</a> and <strong>Raymond Williams&rsquo;s &ldquo;emergent&rdquo;</strong><a class="cite" href="#ref-22">22</a>: new structures of feeling are always forming <em>within</em> the dominant order, never wholly captured.</li>
+        <li><strong>Derrida&rsquo;s ethics of the spectre.</strong> Hauntology was never only melancholy. The ghost carries an <em>obligation</em> — &ldquo;a politics of memory, of inheritance, and of generations,&rdquo; a responsibility to the promises made and to a &ldquo;democracy to come.&rdquo;<a class="cite" href="#ref-23">23</a> To keep the lost future <em>spectral</em> — un-mourned, un-buried, still pressing its claim — is a refusal to let the cancellation be final.</li>
+      </ul>
+    </div>
+    <p class="pull">Hauntology, taken seriously, is not resignation but a practice of keeping the door ajar. Refusing to fully mourn the lost future is refusing to concede that it is dead — the smallest, and perhaps the only honest, form of an imagination that declines to police itself.</p>
+  </section>
+
+  <!-- SOURCES -->
+  <section class="refs" id="sources">
+    <span class="sec-num">Bibliography</span>
+    <h2 class="sec-h">Sources</h2>
+    <p class="note">Print and theoretical works are given in full; where a term is the load-bearing citation, the relevant concept is noted. Original-language first-publication years are given alongside the editions consulted.</p>
+
+    <p class="grp">Primary — capitalist realism &amp; hauntology</p>
+    <ol class="reflist">
+      <li id="ref-1"><span class="n">1</span><cite>Fisher, Mark. <em>Capitalist Realism: Is There No Alternative?</em> Winchester: Zero Books, 2009. (Reflexive impotence; depressive hedonia; the privatization of stress; business ontology; interpassivity; gestural anti-capitalism.)</cite></li>
+    </ol>
+
+    <p class="grp">The genealogy of self-policing power</p>
+    <ol class="reflist">
+      <li id="ref-2"><span class="n">2</span><cite>Gramsci, Antonio. <em>Selections from the Prison Notebooks.</em> Ed./trans. Hoare &amp; Nowell-Smith. New York: International Publishers, 1971. Written 1929–1935. (Hegemony; common sense.)</cite></li>
+      <li id="ref-3"><span class="n">3</span><cite>Althusser, Louis. &ldquo;Ideology and Ideological State Apparatuses.&rdquo; 1970. In <em>Lenin and Philosophy and Other Essays.</em> Trans. Ben Brewster. London: New Left Books, 1971. (Interpellation.)</cite></li>
+      <li id="ref-4"><span class="n">4</span><cite>Horkheimer, Max, and Theodor W. Adorno. &ldquo;The Culture Industry: Enlightenment as Mass Deception.&rdquo; In <em>Dialectic of Enlightenment.</em> 1944/1947. Trans. Edmund Jephcott. Stanford UP, 2002.</cite></li>
+      <li id="ref-5"><span class="n">5</span><cite>Marcuse, Herbert. <em>One-Dimensional Man.</em> Boston: Beacon Press, 1964. (The lost &ldquo;second dimension&rdquo;; repressive desublimation.)</cite></li>
+      <li id="ref-6"><span class="n">6</span><cite>Debord, Guy. <em>The Society of the Spectacle.</em> 1967. Trans. Donald Nicholson-Smith. New York: Zone Books, 1994. (The spectacle; Situationist &ldquo;recuperation.&rdquo;)</cite></li>
+      <li id="ref-7"><span class="n">7</span><cite>Foucault, Michel. <em>Discipline and Punish.</em> 1975. Trans. Alan Sheridan. New York: Pantheon, 1977. (Panopticism.)</cite></li>
+      <li id="ref-8"><span class="n">8</span><cite>Foucault, Michel. <em>The Birth of Biopolitics: Lectures at the Collège de France, 1978–1979.</em> Trans. Graham Burchell. Palgrave Macmillan, 2008. (Neoliberal <em>homo economicus</em>; the &ldquo;entrepreneur of himself.&rdquo;)</cite></li>
+      <li id="ref-9"><span class="n">9</span><cite>Deleuze, Gilles. &ldquo;Postscript on the Societies of Control.&rdquo; <em>October</em> 59 (Winter 1992): 3–7. Orig. 1990.</cite></li>
+      <li id="ref-10"><span class="n">10</span><cite>Han, Byung-Chul. <em>The Burnout Society.</em> 2010. Trans. Erik Butler. Stanford UP, 2015. (The achievement-subject; the society of positivity.)</cite></li>
+      <li id="ref-11"><span class="n">11</span><cite>Han, Byung-Chul. <em>Psychopolitics: Neoliberalism and New Technologies of Power.</em> 2014. Trans. Erik Butler. London: Verso, 2017. (Self-exploitation; freedom as coercion.)</cite></li>
+    </ol>
+
+    <p class="grp">The self-covering mechanism</p>
+    <ol class="reflist">
+      <li id="ref-12"><span class="n">12</span><cite>Sloterdijk, Peter. <em>Critique of Cynical Reason.</em> 1983. Trans. Michael Eldred. University of Minnesota Press, 1987. (&ldquo;Enlightened false consciousness.&rdquo;)</cite></li>
+      <li id="ref-13"><span class="n">13</span><cite>Žižek, Slavoj. <em>The Sublime Object of Ideology.</em> London: Verso, 1989. (&ldquo;They know very well what they are doing, but they are doing it anyway.&rdquo;)</cite></li>
+      <li id="ref-14"><span class="n">14</span><cite>Vaneigem, Raoul. <em>The Revolution of Everyday Life.</em> 1967. Trans. Donald Nicholson-Smith. London: Rebel Press, 1983. (Recuperation, with [6].)</cite></li>
+    </ol>
+
+    <p class="grp">The American specificity</p>
+    <ol class="reflist">
+      <li id="ref-15"><span class="n">15</span><cite>Sombart, Werner. <em>Why Is There No Socialism in the United States?</em> 1906. Trans. Hocking &amp; Husbands. London: Macmillan, 1976.</cite></li>
+      <li id="ref-16"><span class="n">16</span><cite>Brown, Wendy. <em>Undoing the Demos: Neoliberalism&rsquo;s Stealth Revolution.</em> New York: Zone Books, 2015. (Economization; the hollowing of <em>homo politicus</em>.)</cite></li>
+      <li id="ref-17"><span class="n">17</span><cite>Berlant, Lauren. <em>Cruel Optimism.</em> Durham, NC: Duke University Press, 2011.</cite></li>
+      <li id="ref-18"><span class="n">18</span><cite>U.S. Senate, Church Committee. <em>Final Report,</em> Book III (COINTELPRO). Washington, DC: U.S. Government Printing Office, 1976.</cite></li>
+    </ol>
+
+    <p class="grp">The exit — utopian &amp; spectral counter-currents</p>
+    <ol class="reflist">
+      <li id="ref-19"><span class="n">19</span><cite>Fisher, Mark. &ldquo;Acid Communism (Unfinished Introduction).&rdquo; In <em>k-punk.</em> Ed. Darren Ambrose. London: Repeater Books, 2018.</cite></li>
+      <li id="ref-20"><span class="n">20</span><cite>Fisher, Mark. <em>Postcapitalist Desire: The Final Lectures.</em> Ed. Matt Colquhoun. London: Repeater Books, 2020.</cite></li>
+      <li id="ref-21"><span class="n">21</span><cite>Bloch, Ernst. <em>The Principle of Hope.</em> 1954–1959. Trans. Plaice, Plaice &amp; Knight. Cambridge, MA: MIT Press, 1986. (The utopian function.)</cite></li>
+      <li id="ref-22"><span class="n">22</span><cite>Williams, Raymond. <em>Marxism and Literature.</em> Oxford UP, 1977. (Dominant / residual / emergent; structures of feeling.)</cite></li>
+      <li id="ref-23"><span class="n">23</span><cite>Derrida, Jacques. <em>Specters of Marx.</em> Trans. Peggy Kamuf. New York: Routledge, 1994. Orig. 1993. (The ethics of the spectre; &ldquo;democracy to come.&rdquo;)</cite></li>
+    </ol>
+
+    <p class="grp">Related (context)</p>
+    <ol class="reflist">
+      <li id="ref-24"><span class="n">24</span><cite>Berardi, Franco &ldquo;Bifo.&rdquo; <em>The Soul at Work: From Alienation to Autonomy.</em> Los Angeles: Semiotext(e), 2009. (Semiocapitalism.)</cite></li>
+      <li id="ref-25"><span class="n">25</span><cite>Jameson, Fredric. <em>Archaeologies of the Future: The Desire Called Utopia and Other Science Fictions.</em> London: Verso, 2005. (The utopian imagination and its blockages.)</cite></li>
+    </ol>
+  </section>
+
+  <footer>
+    Distilled from our exploration and cross-checked against the sources above. A brainstorming document, not a peer-reviewed article; corrections and additions welcome.
+  </footer>
+</div>

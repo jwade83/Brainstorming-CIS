@@ -28,6 +28,8 @@ The repo is intentionally lightweight and will grow as needed. Current contents:
 | `hauntology-liminal-horror.html` | Self-contained, styled web version of the hauntology notes (readable in any browser; light/dark aware). |
 | `hauntology-essay.md` | Companion essay: hauntology as one continuous argument (Derrida → Fisher → internet myths → media lineage), with an exhaustive cited bibliography. |
 | `hauntology-essay.html` | Self-contained, styled web version of the essay, with clickable citation references. |
+| `who-cancels-the-future.md` | Deep-dive companion: the *power-side* account — how the imagination is made to police itself (Gramsci → Marcuse → Foucault → Han → Fisher), with an exhaustive cited bibliography. |
+| `who-cancels-the-future.html` | Self-contained, styled web version of the deep-dive, with clickable citation references. |
 
 A test stack (language, test runner, linting) hasn't been chosen yet — it'll be added once the direction of the experiments is clearer.
 
